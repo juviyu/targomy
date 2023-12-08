@@ -23,6 +23,7 @@ void Actuator::update()
   }
 }
 
-ActuatorState Actuator::getState(){
+ActuatorState Actuator::getState()
+{
   return state;
 }
