@@ -1,16 +1,28 @@
 #include "Actuator.h"
 
-//Actuator::Actuator(int pin) : pin(pin) {
-// pinMode(pin, OUTPUT);
-//}
+void Actuator::setTarget(int targetPos, int speed, unsigned long timeout)
+{
+  this->targetPos = targetPos;
+  stepDuration = 1000 / speed; // for when speed is in steps per seconds. can be multiplied by ticks per rotation to get rot/second
 
-void Actuator::setTarget(int target,int speed, unsigned long timeout) {
-  this->target = target;
-  this->timeout = timeout;
-  startTime = millis();
+  timeoutTime = millis() + timeout;
+  onSetTarget();
+  state = RUNNING;
 }
 
+void Actuator::update()
+{
+  if (millis() >= timeoutTime)
+  {
+    state = TIMEOUT;
+    onTimeoutReached();
+  }
+  else
+  {
+    onUpdate();
+  }
+}
 
-bool Actuator::_timeoutReached() {
-  return (millis() - startTime) >= timeout;
+ActuatorState Actuator::getState(){
+  return state;
 }

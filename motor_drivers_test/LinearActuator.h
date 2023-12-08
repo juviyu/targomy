@@ -6,32 +6,31 @@
 
 class LinearActuator : public Actuator {
 
-  protected:
-    const int servoToPotRange[2][2] = {{1050, 950}, {1950, 90}}; // maps to int : 0 - 100
-    const int servoSetpointTreshold = 5;
+private:
+  const int SERVO_TO_POT_RANGE[2][2] = { { 1050, 1950 }, { 90, 950 } };  // maps to int : 0 - 100
+  const int SERVO_GOAL_THRSHLD_MICROS = 15;
+  int SERVO_STEP_SIZE = 1;
+  int moveDirection = 0;
 
-  private:
-    int potPin;
-    int pin;
-    int servoTargetPos;
-    int potTarget;
-    int currentServoPos;
+  Servo servo;
+  int potPin;
+  int pin;
+  int servoOutputVal;
+  int servoGoalMicroseconds;
 
-    unsigned long maxTimeToReachPos;
-    unsigned long timeForNextActuatorStep;
-    int stepDuration;
-    uint8_t servoStepSize;
+  unsigned long timeForNextActuatorStep;
+  int stepDuration;
 
-    Servo servo;
+  bool servoReachedGoal();
+  int getServoPosMicroSeconds();
 
-  public:
-    LinearActuator(int pin, int potPin);
-    void setup() override;
-    void update() override;
-    bool servoReachedPos();
-    int getServoPos();
-    ActuatorState getState();
-    void setTarget(int targetPos, int speed, unsigned long timout);
+  void onUpdate();
+  void onSetTarget();
+  void onTimeoutReached();
+
+public:
+  void setup();
+  LinearActuator(int pin, int potPin);
 };
 
 #endif
