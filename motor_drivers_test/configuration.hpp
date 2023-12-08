@@ -2,9 +2,9 @@
 /* PINS SETUP */
 
 //communications
-byte mac[] = {0x04, 0xE9, 0xE5, 0x14, 0x34, 0xB4}; //TODO: Check valid MAC (Depending on teensy) 80
-IPAddress ip(100, 22, 13, 59);
-ConnectionPort = 1234;
+//byte mac[] = {0x04, 0xE9, 0xE5, 0x14, 0x34, 0xB4}; //TODO: Check valid MAC (Depending on teensy) 80
+//IPAddress ip(100, 22, 13, 59);
+//ConnectionPort = 1234;
 
 //Targonel
 #define BOCHNA1_TARGONEL_CONTROL_PIN 2
@@ -41,5 +41,3 @@ ConnectionPort = 1234;
 #define MIN_PWM_VAL 1000
 const int grifa_speed = 5;
 /**********************/
-
-
