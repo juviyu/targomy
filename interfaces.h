@@ -1,8 +1,6 @@
 
 ActuatorState {
-    running
-    success
-    failiure
+    running /success / failiure
 }
 
 
