@@ -1,2 +1,2 @@
-# targonel
+# targomy
 nahash oti nahash
