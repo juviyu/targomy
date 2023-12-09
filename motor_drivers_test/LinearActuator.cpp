@@ -29,8 +29,10 @@ void LinearActuator::onUpdate() {
 
   if (servoReachedGoal())
     state = SUCCESS;
-  else
+  else{
     servo.writeMicroseconds(servoOutputVal);
+    Serial.printf("moving servo to %d\n", servoOutputVal);
+  }
 }
 
 void LinearActuator::onTimeoutReached() {
